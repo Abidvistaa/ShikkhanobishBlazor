@@ -109,6 +109,12 @@
                             <span> Teacher Withdraw </span>
                         </a>
                     </li>
+                    <li>
+                        <a href="SendMessage">
+                            <i class="far fa-share-square"></i>
+                            <span> Send Message </span>
+                        </a>
+                    </li>
                 </ul>
 
             </div>
@@ -186,11 +192,12 @@
                     <br />
                     <div class="">
                         <label style="color:blueviolet;font-size:30px;">Pending Questions </label>
-                        <br/>
+                        <br />
                         <label>@showInfoPQTLoading</label>
                     </div>
                     <div class="form-group row">
                         <div class="col-md-10">
+
                             <div class="table-responsive">
                                 <table id="" class="table table-bordered" style="text-align:center; ">
                                     <thead style="color: black; font-weight: bold;font-size:10px;">
@@ -228,10 +235,12 @@
                             </div>
                         </div>
                         <div class="col-md-2">
+                          
                             <div class="table-responsive">
-                                <table  class="table table-bordered" style="text-align:center; ">
+
+                                <table class="table table-bordered" style="text-align:center; ">
                                     <thead style="color: black; font-weight: bold; font-size: 10px;">
-                                        <tr >
+                                        <tr>
                                             <th>Matching</th>
                                         </tr>
                                     </thead>
@@ -342,6 +351,7 @@
     int pendingQues;
     string showInfoPQTLoading { get; set; }
     string showInfoSubmitLoading { get; set; }
+    string showPercentCheckLoading { get; set; }
     List<int> acceptedQS = new List<int>();
     List<int> declineQS = new List<int>();
     public string userName { get; set; }
@@ -350,7 +360,7 @@
     List<TecaherQuestionHistory> tqhl = new List<TecaherQuestionHistory>();
 
     List<MatchingRate> allMatchRate = new List<MatchingRate>();
-    
+
 
     List<TeacherQuestionStatusCount> tqscResult = new List<TeacherQuestionStatusCount>();
     List<Question> qList = new List<Question>();
@@ -360,6 +370,7 @@
         await Refresh();
 
         await InvokeAsync(StateHasChanged);
+
         CheckEverySungleQS();
 
     }
@@ -472,7 +483,7 @@
                 qList.Add(quesList[i]);
             }
         }
-        showInfoPQTLoading = "Peding question done!";
+        showInfoPQTLoading = "Pending question done!";
         //qList = quesList;
 
         List<int> teacherIDList = new List<int>();
@@ -638,7 +649,8 @@
             List<double> parcentList = new List<double>();
             for (int j = 0; j < quesList.Count; j++)
             {
-                if(qList[i].questionID != quesList[j].questionID)
+              
+                if (qList[i].questionID != quesList[j].questionID)
                 {
                     var sm = CalculateSimilarity(qList[i].mainQuestion, quesList[j].mainQuestion);
                     parcentList.Add(sm);
@@ -648,6 +660,7 @@
             double max = 0;
             for (int k = 0; k < parcentList.Count; k++)
             {
+
                 if (max < parcentList[k])
                 {
                     max = parcentList[k];
@@ -662,12 +675,12 @@
             {
                 mr.colorMatchRate = "#E20822";
             }
-                else
-                {
-                    mr.colorMatchRate = "black";
-                }
+            else
+            {
+                mr.colorMatchRate = "black";
+            }
             allMatchRate.Add(mr);
-           
+
         }
 
     }

@@ -37,13 +37,13 @@
                 <li class="dropdown notification-list">
                     <a class="nav-link dropdown-toggle nav-user mr-0" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
                         <img src="/images/images.png" alt="user-image" class="rounded-circle" />
-                        <span class="pro-user-name ml-1"> <i class="mdi mdi-chevron-down"></i> </span>
+                        <span class="pro-user-name ml-1"> <i class="mdi mdi-chevron-down"></i> @userName</span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right profile-dropdown">
                         <!-- item-->
                         <a href="javascript:void(0);" class="dropdown-item notify-item">
                             <i class="mdi mdi-logout-variant"></i>
-                            <span>Logout</span>
+                            <span @onclick="Logout">Logout</span>
                         </a>
                     </div>
                 </li>
@@ -65,7 +65,7 @@
                     <img src="/images/images.png" alt="" class="avatar-md rounded-circle" />
                 </div>
                 <div class="user-info">
-                    <a href="#"></a>
+                    <a href="#">@userName</a>
                 </div>
             </div>
 
@@ -109,6 +109,12 @@
                             <span> Teacher Withdraw </span>
                         </a>
                     </li>
+                    <li>
+                        <a href="SendMessage">
+                            <i class="far fa-share-square"></i>
+                            <span> Send Message </span>
+                        </a>
+                    </li>
                 </ul>
 
             </div>
@@ -129,114 +135,133 @@
                 <div class="container-fluid">
 
                     <div class="">
+                        <label style="color:black;font-size:25px">Send  Message To Random Number</label>
+                        <br />
+                        <br />
+                        <div class="form-group row">
+                            <div class="col-3">
+                                <input class="form-control" type="text" placeholder="Enter Phone Number" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                <label class="m-0" style="color:black;font-size:14px">Message</label>
+                                <textarea class="form-control " style="height:250px"></textarea>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="form-group row">
+                            <div class="col-10" style="text-align:right">
+                                <button class="btn btn-outline-secondary " style="height:40px;width:100px;">Test</button>
+                            </div>
+                            <div class="col-2" style="text-align:right">
+                                <button class="btn btn-outline-success " style="height:40px;width:160px;">Send</button>
+                            </div>
+                        </div>
+                        <br />
+
+
+                        <br />
+                        <hr style="height: 5px; background-color: #E2089C " />
+                        
+
                         <label style="color:black;font-size:25px">Send  Message To Student</label>
+                        <br />
+                        <br />
 
                         <div class="form-group row">
                             <div class="col-md-6">
+                                <label class="m-0" style="color:black;font-size:14px">Message</label>
                                 <textarea class="form-control " style="height:250px"></textarea>
                             </div>
                         </div>
                         <br />
 
                         <div class="form-group row">
-                            <div class="col-md- ">
-                                <select class="form-control btn btn-purple" id="Name">
-                                    <option style="" value="">-- Select Student --</option>
-
-                                    <option value=""></option>
-
-                                </select>
-
+                            <div class="col-2">
+                                <input style="width: 140px; border-color:mediumpurple; font-size: 11px"  class="form-control  "  type="text" placeholder="Enter Info" />
                             </div>
+                            
+                            <div class="col-2">
+                                <input readonly style="width: 140px; border-color: mediumpurple; font-size: 11px"  class="form-control" type="text" />
+                            </div>
+                            <label style="color:mediumpurple;font-size:24px;">/</label>
+                            <div class=" col-2">
 
-                            <div class="col-md- ">
-                                <label style="padding: 3px;margin-left:3px; color: black; font-weight: bold; font-size: 18px; height: 20px;">/</label>
-                                <button class="btn btn-outline-success ">Send</button>
-                                <label style="padding: 3px; color: black; font-weight: bold; font-size: 18px; height: 20px;">/</label>
-                                <button class="btn btn-outline-success ">SendAllStudent</button>
+                                <button style="width: 140px; font-size: 11px" class="btn btn-outline-purple ">All Student</button>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="form-group row">
+                            <div class="col-10" style="text-align:right">
+                                <button class="btn btn-outline-secondary " style="height:40px;width:100px;">Test</button>
+                            </div>
+                            <div class="col-2" style="text-align:right">
+                                <button class="btn btn-outline-success " style="height:40px;width:160px;">Send</button>
                             </div>
                         </div>
                         <br />
 
 
-                        <div class="form-group row p-1">
-                            <div class="col-md-8" style="border:2px">
-                                <div class="form-group row">
-                                    <div class="col-md-1">
-                                        <label style="color:black">Name</label>
-                                    </div>
-                                    <div class="col-md-1">
-                                        <label style="color:black">PhoneNumber</label>
-                                    </div>
-                                </div>
 
-
-                                <div class=" form-group row">
-                                    <div class=" col-md-6">
-                                        <textarea class="form-control" readonly style="height:250px"></textarea>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
                     </div>
 
                     <br />
                     <hr style="height: 5px; background-color: #E2089C " />
-                    <br />
+                    
 
                     <div class="">
                         <label style="color:black;font-size:25px">Send  Message To Teacher</label>
-
+                        <br />
+                        <br />
                         <div class="form-group row">
                             <div class="col-md-6">
+                                <label class="m-0" style="color:black;font-size:14px">Message</label>
                                 <textarea class="form-control " style="height:250px"></textarea>
                             </div>
                         </div>
                         <br />
 
                         <div class="form-group row">
-                            <div class="col-md- ">
-                                <select class="form-control btn btn-purple" id="Name">
-                                    <option style="" value="">-- Select Teacher --</option>
-
-                                    <option value=""></option>
-
-                                </select>
-
+                            <div class="col-2">
+                                <input style="width: 140px; border-color: mediumpurple; font-size: 11px" class="form-control" type="text" placeholder="Enter Info" @bind="teachers.phonenumber" />
+                            </div>
+                            <button class="btn btn-secondary" @onclick="Search">Search</button>
+                            <div class="col-2">
+                                <input readonly style="width: 140px; border-color: mediumpurple; font-size: 11px" class="form-control" type="text" @bind="@searchedValue" />
+                                
                             </div>
 
-                            <div class="col-md- ">
-                                <label style="padding: 3px; margin-left: 3px; color: black; font-weight: bold; font-size: 18px; height: 20px;">/</label>                      
-                                <button class="btn btn-outline-success ">SendOnlySelected</button>
-                                <label style="padding: 3px; color: black; font-weight: bold; font-size: 18px; height: 20px;">/</label>
-                                <button class="btn btn-outline-success ">SendMonetized</button>
-                                <label style="padding: 3px; color: black; font-weight: bold; font-size: 18px; height: 20px;">/</label>
-                                <button class="btn btn-outline-success ">SendNotMonetized</button>
+                            <label style="color:mediumpurple;font-size:24px;">/</label>
+                            <div class=" col-2">
+                                <button style="width: 140px; font-size:10px" class="btn btn-outline-purple ">Only Selected</button>
+                            </div>
+                            <label style="color:mediumpurple;font-size:24px;">/</label>
+                            <div class=" col-2">
+                                <button style="width: 140px; font-size: 10px" class="btn btn-outline-purple ">Monetized</button>
+                            </div>
+                            <label style="color:mediumpurple;font-size:24px;">/</label>
+                            <div class=" col-2">
+                                <button style="width: 140px;font-size:10px" class="btn btn-outline-purple ">Not Monetized</button>
+                            </div>
+                            <label style="color:mediumpurple;font-size:24px;">/</label>
+                            <div class=" col-2">
+                                <button style="width: 140px;font-size:10px" class="btn btn-outline-purple ">All Teacher</button>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="form-group row">
+                            <div class="col-10" style="text-align:right">
+                                <button class="btn btn-outline-secondary " style="height:40px;width:100px;">Test</button>
+                            </div>
+                            <div class="col-2" style="text-align:right">
+                                <button class="btn btn-outline-success " style="height:40px;width:160px;">Send</button>
                             </div>
                         </div>
                         <br />
 
 
-                        <div class="form-group row p-1">
-                            <div class="col-md-8" style="border:2px">
-                                <div class="form-group row">
-                                    <div class="col-md-1">
-                                        <label style="color:black">Name</label>
-                                    </div>
-                                    <div class="col-md-1">
-                                        <label style="color:black">PhoneNumber</label>
-                                    </div>
-                                </div>
-
-                                <div class=" form-group row">
-                                    <div class=" col-md-6">
-                                        <textarea class="form-control" readonly style="height:250px"></textarea>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
+                        
                     </div>
 
 
@@ -269,7 +294,55 @@
 
 @code{
 
+    public string userName { get; set; }
+    public string pass { get; set; }
+    List<string> name = new List<string>();
 
+    Teachers teachers = new Teachers();
+    List<Teachers> teacherList = new List<Teachers>();
+    public string searchedValue { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        userName = await oLocalStore.GetItemAsync<string>("name");
+        pass = await oLocalStore.GetItemAsync<string>("passWord");
+        name.Add("gg");
+        name.Add("sg");
+        name.Add("fg");
+        name.Add("eg");
+        name.Add("mg");
+        await GetTeacher();
+    }
+
+
+
+    [Inject]
+    public NavigationManager nvi { get; set; }
+
+    public async Task Logout()
+    {
+        await oLocalStore.ClearAsync();
+        string redirectURL = "/";
+        nvi.NavigateTo(redirectURL);
+    }
+
+    public async Task GetTeacher()
+    {
+        var tList = await "https://api.shikkhanobish.com/api/ShikkhanobishTeacher/getAllTeacher".PostJsonAsync(new { }).ReceiveJson<List<Teachers>>();
+        teacherList = tList;
+    }
+    public void Search()
+    {
+
+        for(int i = 0; i < teacherList.Count; i++)
+        {
+            if (teachers.phonenumber == teacherList[i].phonenumber)
+            {
+                searchedValue = teacherList[i].name + " "+teacherList[i].phonenumber;
+            }
+        }
+
+    }
 
 
 }
