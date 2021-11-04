@@ -178,17 +178,22 @@
                         <br />
 
                         <div class="form-group row">
-                            <div class="col-2">
-                                <input style="width: 140px; border-color:mediumpurple; font-size: 11px"  class="form-control  "  type="text" placeholder="Enter Info" />
+                            <div class="col-2 pr-0">
+                                <input style=" border-color: mediumpurple; font-size: 11px" class="form-control mdi-tooltip-outline " title="Enter Name or PhoneNumber" type="text" placeholder="Enter Info" @bind="student.namephoneStudent" />
                             </div>
-                            
-                            <div class="col-2">
-                                <input readonly style="width: 140px; border-color: mediumpurple; font-size: 11px"  class="form-control" type="text" />
-                            </div>
-                            <label style="color:mediumpurple;font-size:24px;">/</label>
-                            <div class=" col-2">
+                            <div class="">
+                                <button class="btn btn-default p-0 pt-1" style="display:inline-block;" @onclick="SearchStudentInfo"><i style="color:crimson;font-size:25px;" class="fas fa-search"></i></button>&nbsp;&nbsp;&nbsp;
 
-                                <button style="width: 140px; font-size: 11px" class="btn btn-outline-purple ">All Student</button>
+                            </div>&nbsp;&nbsp;
+
+                            <div class="col-2 ">
+                                <button style="width: 140px; font-size:10px" class="btn btn-outline-purple mdi-tooltip-text-outline" title="Click to Select">@searchedValueStudent</button>
+
+                            </div>&nbsp;&nbsp;&nbsp;
+
+                            <label class="m-0" style="color:mediumpurple;font-size:24px;">/</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <div class=" col-2 m-0">
+                                <button style="width: 140px; font-size:10px" class="btn btn-outline-purple ">All Student</button>
                             </div>
                         </div>
                         <br />
@@ -222,30 +227,33 @@
                         </div>
                         <br />
 
-                        <div class="form-group row">
-                            <div class="col-2">
-                                <input style="width: 140px; border-color: mediumpurple; font-size: 11px" class="form-control" type="text" placeholder="Enter Info" @bind="teachers.phonenumber" />
+                        <div class="form-group row ">
+                            <div class="col-2 pr-0">
+                                <input style=" border-color: mediumpurple; font-size: 11px" class="form-control mdi-tooltip-text-outline" title="Enter Name or PhoneNumber" type="text" placeholder="Enter Info" @bind="teacher.namephoneTeacher" />
                             </div>
-                            <button class="btn btn-secondary" @onclick="Search">Search</button>
-                            <div class="col-2">
-                                <input readonly style="width: 140px; border-color: mediumpurple; font-size: 11px" class="form-control" type="text" @bind="@searchedValue" />
-                                
-                            </div>
+                            <div class="">
+                                <button class="btn btn-default p-0 pt-1" style="display:inline-block;" @onclick="SearchTeacherInfo"><i style="color:crimson;font-size:25px;" class="fas fa-search"></i></button>&nbsp;&nbsp;&nbsp;
 
-                            <label style="color:mediumpurple;font-size:24px;">/</label>
-                            <div class=" col-2">
+                            </div>&nbsp;&nbsp;
+
+                            <div class="col-2 ">
+                                <button style="width: 140px; font-size:10px" class="btn btn-outline-purple mdi-tooltip-text-outline" title="Click to Select">@searchedValueTeacher</button>
+                            </div>&nbsp;&nbsp;&nbsp;
+
+                            <label class="m-0" style="color:mediumpurple;font-size:24px;">/</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <div class=" col-2 m-0">
                                 <button style="width: 140px; font-size:10px" class="btn btn-outline-purple ">Only Selected</button>
                             </div>
-                            <label style="color:mediumpurple;font-size:24px;">/</label>
+                            <label class="m-0" style="color:mediumpurple;font-size:24px;">/</label>&nbsp;&nbsp;&nbsp;&nbsp;
                             <div class=" col-2">
                                 <button style="width: 140px; font-size: 10px" class="btn btn-outline-purple ">Monetized</button>
                             </div>
-                            <label style="color:mediumpurple;font-size:24px;">/</label>
+                            <label class="m-0" style="color:mediumpurple;font-size:24px;">/</label>&nbsp;&nbsp;&nbsp;&nbsp;
                             <div class=" col-2">
                                 <button style="width: 140px;font-size:10px" class="btn btn-outline-purple ">Not Monetized</button>
                             </div>
-                            <label style="color:mediumpurple;font-size:24px;">/</label>
-                            <div class=" col-2">
+                            <label class="m-0" style="color:mediumpurple;font-size:24px;">/</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <div class=" col-2 mt-3 ">
                                 <button style="width: 140px;font-size:10px" class="btn btn-outline-purple ">All Teacher</button>
                             </div>
                         </div>
@@ -298,20 +306,23 @@
     public string pass { get; set; }
     List<string> name = new List<string>();
 
-    Teachers teachers = new Teachers();
+    //new changed
+    Student student = new Student();
+    List<Student> studentList = new List<Student>();
+    string searchedValueStudent= "No Info Yet";
+
+    Teachers teacher = new Teachers();
     List<Teachers> teacherList = new List<Teachers>();
-    public string searchedValue { get; set; }
+    string searchedValueTeacher = "No Info Yet";
 
     protected override async Task OnInitializedAsync()
     {
         userName = await oLocalStore.GetItemAsync<string>("name");
         pass = await oLocalStore.GetItemAsync<string>("passWord");
-        name.Add("gg");
-        name.Add("sg");
-        name.Add("fg");
-        name.Add("eg");
-        name.Add("mg");
-        await GetTeacher();
+
+        await GetTeacherInfo();
+        //new changed
+        await GetStudentInfo();
     }
 
 
@@ -326,19 +337,41 @@
         nvi.NavigateTo(redirectURL);
     }
 
-    public async Task GetTeacher()
+    //new changed
+    public async Task GetStudentInfo()
+    {
+        var sList = await "https://api.shikkhanobish.com/api/ShikkhanobishLogin/getStudent".GetJsonAsync<List<Student>>();
+        studentList = sList;
+    }
+
+    public async Task GetTeacherInfo()
     {
         var tList = await "https://api.shikkhanobish.com/api/ShikkhanobishTeacher/getAllTeacher".PostJsonAsync(new { }).ReceiveJson<List<Teachers>>();
         teacherList = tList;
     }
-    public void Search()
+
+    //new changed
+    public void SearchStudentInfo()
+    {
+
+        for (int i = 0; i < studentList.Count; i++)
+        {
+            if (student.namephoneStudent == studentList[i].phonenumber || student.namephoneStudent==studentList[i].name)
+            {
+                searchedValueStudent = studentList[i].name + " " + studentList[i].phonenumber;
+            }
+        }
+
+    }
+
+    public void SearchTeacherInfo()
     {
 
         for(int i = 0; i < teacherList.Count; i++)
         {
-            if (teachers.phonenumber == teacherList[i].phonenumber)
+            if (teacher.namephoneTeacher==teacherList[i].phonenumber || teacher.namephoneTeacher==teacherList[i].name)
             {
-                searchedValue = teacherList[i].name + " "+teacherList[i].phonenumber;
+                searchedValueTeacher = teacherList[i].name + " "+teacherList[i].phonenumber;
             }
         }
 

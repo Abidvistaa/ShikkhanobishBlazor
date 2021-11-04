@@ -18,5 +18,6 @@ namespace ShikkhanobishBlazor.Models
         public string name { get; set; }
         public string institutionName { get; set; }
         public string Response { get; set; }
+        public string namephoneStudent { get; set; }
     }
 }

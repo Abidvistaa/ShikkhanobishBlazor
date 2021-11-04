@@ -26,5 +26,6 @@ namespace ShikkhanobishBlazor.Models
         public double amount { get; set; }
         public string activeTime { get; set; }
         public string Response { get; set; }
+        public string namephoneTeacher { get; set; }
     }
 }
